@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Recommendations</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ЗАДАЧА 2: Навигационная панель -->
+    <nav class="navbar">
+        <div class="logo">Travel Recommendations</div>
+        <ul class="nav-links">
+            <li><a href="#home">Главная</a></li>
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#contact">Контакты</a></li>
+        </ul>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Поиск: пляж, храм, страна...">
+            <button onclick="searchDestinations()">Поиск</button>
+            <button onclick="clearSearch()">Очистить</button>
+        </div>
+    </nav>
+
+  <!-- ЗАДАЧА 3: Главная страница с введением -->
+    <section id="home">
+        <h1>Откройте мир вместе с нами</h1>
+        <p>Добро пожаловать на наш сайт рекомендаций! Введите в поиск "пляж", "храм" или "страна", чтобы найти идеальное место для следующего путешествия.</p>
+        
+        <!-- Контейнер для вывода результатов поиска -->
+        <div id="results-container"></div>
+    </section>
+
+  <!-- ЗАДАЧА 4: Страница О нас -->
+    <section id="about">
+        <h2>О нас</h2>
+        <p>Наша команда состоит из заядлых путешественников. Мы собираем лучшие рекомендации со всего мира, чтобы ваш отдых был незабываемым. Наш проект призван вдохновлять людей на новые открытия и помогать с планированием маршрутов.</p>
+    </section>
+
+<!-- ЗАДАЧА 5: Форма на странице Контакты -->
+    <section id="contact">
+        <h2>Свяжитесь с нами</h2>
+        <form id="contactForm">
+            <label for="name">Ваше имя:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Ваш Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="message">Сообщение:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+            
+            <button type="submit">Отправить</button>
+        </form>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+  
