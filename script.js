@@ -1,20 +1,17 @@
-// База данных рекомендаций с 2 изображениями на каждую категорию
+// Обновленная база данных: теперь у каждого места свое название и описание
 const data = {
-    "пляж": {
-        title: "Лучшие пляжи мира",
-        description: "Насладитесь солнцем и морем на этих великолепных пляжах.",
-        images: ["beach1.jpg", "beach2.jpg"] // Убедись, что эти файлы есть в папке
-    },
-    "храм": {
-        title: "Исторические храмы",
-        description: "Погрузитесь в историю и культуру древних цивилизаций.",
-        images: ["temple1.jpg", "temple2.jpg"]
-    },
-    "страна": {
-        title: "Популярные страны",
-        description: "Откройте для себя новые культуры и традиции.",
-        images: ["country1.jpg", "country2.jpg"]
-    }
+    "пляж": [
+        { name: "Копакабана, Бразилия", description: "Самый известный пляж Рио-де-Жанейро с белоснежным песком.", image: "beach1.jpg" },
+        { name: "Майя Бэй, Таиланд", description: "Тропический рай с кристально чистой водой и скалами.", image: "beach2.jpg" }
+    ],
+    "храм": [
+        { name: "Ангкор-Ват, Камбоджа", description: "Крупнейший в мире храмовый комплекс, посвященный богу Вишну.", image: "temple1.jpg" },
+        { name: "Парфенон, Греция", description: "Античный храм в Афинах, символ древнегреческой архитектуры.", image: "temple2.jpg" }
+    ],
+    "страна": [
+        { name: "Токио, Япония", description: "Ультрасовременный мегаполис, бережно хранящий древние традиции.", image: "country1.jpg" },
+        { name: "Париж, Франция", description: "Столица романтики, искусства и знаменитой Эйфелевой башни.", image: "country2.jpg" }
+    ]
 };
 
 function searchDestinations() {
@@ -22,23 +19,24 @@ function searchDestinations() {
     const resultsContainer = document.getElementById("results-container");
     resultsContainer.innerHTML = ""; // Очищаем старые результаты
 
-    // Ищем совпадения (поддерживаем склонения, например, если введут "пляжи")
     let matchKey = null;
-    if (input.includes("пляж")) matchKey = "пляж";
-    else if (input.includes("храм")) matchKey = "храм";
-    else if (input.includes("стран")) matchKey = "страна";
+    if (input.includes("пляж") || input.includes("beach")) matchKey = "пляж";
+    else if (input.includes("храм") || input.includes("temple")) matchKey = "храм";
+    else if (input.includes("стран") || input.includes("country")) matchKey = "страна";
 
     if (matchKey) {
-        const item = data[matchKey];
-        // Генерируем HTML с заголовком и 2 картинками
-        resultsContainer.innerHTML = `
-            <div class="result-card">
-                <h2>${item.title}</h2>
-                <p>${item.description}</p>
-                <img src="${item.images[0]}" alt="${matchKey} 1">
-                <img src="${item.images[1]}" alt="${matchKey} 2">
-            </div>
-        `;
+        // Проходимся по массиву и создаем карточку для каждого конкретного места
+        data[matchKey].forEach(item => {
+            resultsContainer.innerHTML += `
+                <div class="result-card" style="display: flex; align-items: center; margin-bottom: 20px;">
+                    <img src="${item.image}" alt="${item.name}" style="width: 300px; height: 200px; object-fit: cover; margin-right: 20px; border-radius: 8px;">
+                    <div>
+                        <h2>${item.name}</h2>
+                        <p>${item.description}</p>
+                    </div>
+                </div>
+            `;
+        });
     } else {
         resultsContainer.innerHTML = "<p>Пожалуйста, введите 'пляж', 'храм' или 'страна'.</p>";
     }
@@ -49,7 +47,6 @@ function clearSearch() {
     document.getElementById("results-container").innerHTML = "";
 }
 
-// Предотвращение перезагрузки страницы при отправке формы
 document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
     alert("Спасибо! Ваше сообщение отправлено.");
